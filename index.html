@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anime Tower Defense - Game Design Doc</title>
+<meta name="description" content="Game design doc for the Anime Tower Defense game on Roblox. Working title. Vision by Game Director Jeffee123.">
+<style>
+  :root{--bg:#0b0e1a;--panel:#141830;--panel2:#1a2044;--ink:#eef1ff;--muted:#aab0d6;--line:#2a3160;--gold:#f5c542;--red:#ff4d5e;--violet:#9b7bff;--blue:#4da3ff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  a{color:#8ec2ff}
+  header.hero{padding:56px 20px 40px;text-align:center;background:radial-gradient(720px 300px at 50% -40px,rgba(155,123,255,.45),transparent),linear-gradient(180deg,#1a2044,#0b0e1a)}
+  header.hero h1{margin:0 0 8px;font-size:clamp(32px,6vw,56px);line-height:1.05;letter-spacing:-.02em}
+  header.hero h1 span{color:var(--gold)}
+  header.hero p{margin:0 auto;max-width:640px;color:var(--muted);font-size:18px}
+  .pill{display:inline-block;margin-bottom:14px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;color:var(--gold);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+  nav{position:sticky;top:0;z-index:5;background:rgba(11,14,26,.92);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+  nav a{display:inline-block;padding:12px 14px;color:var(--muted);text-decoration:none;font-size:14px}
+  nav a:hover{color:var(--ink)}
+  main{max-width:860px;margin:0 auto;padding:28px 20px 64px}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:0 0 18px}
+  h2{margin:0 0 10px;font-size:22px}
+  h2 .n{color:var(--gold);margin-right:8px}
+  p,li{color:#d6dbf5}
+  ul{padding-left:20px}
+  li{margin:4px 0}
+  .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+  .pillar{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .pillar b{display:block;margin-bottom:4px}
+  .rarities{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .rarity{padding:6px 12px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid var(--line)}
+  .r-common{color:#cfd6ff}.r-rare{color:#4da3ff}.r-epic{color:#b07bff}.r-legendary{color:#f5c542}.r-mythic{color:#ff4d5e}.r-secret{color:#7dffd4}.r-origin{color:#fff;background:linear-gradient(90deg,#9b7bff,#ff4d5e)}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+  .status{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+  .stat{flex:1 1 180px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px}
+  .stat b{display:block;color:var(--gold)}
+  .open li::marker{color:var(--gold)}
+  .note{color:var(--muted);font-size:14px}
+  footer{max-width:860px;margin:0 auto;padding:0 20px 48px;color:var(--muted);font-size:14px;text-align:center}
+  @media (max-width:560px){section{padding:18px}header.hero{padding:40px 16px 28px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <span class="pill">Working title &middot; Roblox</span>
+  <h1>Anime <span>Tower Defense</span></h1>
+  <p>Collect units, build teams, and fight through stages and challenges. A high quality anime tower defense game with distinctive systems, exciting combat, and long term progression.</p>
+</header>
+<nav aria-label="Sections">
+  <a href="#glance">At a glance</a><a href="#core">Core gameplay</a><a href="#rarities">Rarities</a><a href="#summoning">Summoning</a><a href="#combat">Combat</a><a href="#systems">Systems</a><a href="#modes">Modes</a><a href="#lobby">Lobby</a><a href="#trading">Trading</a><a href="#story">Story</a><a href="#quality">Quality bar</a><a href="#status">Status</a><a href="#open">Open decisions</a>
+</nav>
+<main>
+  <section id="glance">
+    <h2><span class="n">01</span>The game at a glance</h2>
+    <p>Director Jeffee123&rsquo;s goal: distinctive systems, exciting combat, and presentation that stands out. Detailed models, smooth animation, impressive VFX, and polished UI.</p>
+    <div class="pillars">
+      <div class="pillar"><b>Collecting</b>Summoning units across 7 rarities, with rare pulls treated as big cinematic moments.</div>
+      <div class="pillar"><b>Strategy</b>Placement, team composition, upgrades and abilities that reward thinking, not just placing units and waiting.</div>
+      <div class="pillar"><b>Long term progression</b>Traits, evolutions, limit breaks, raids, tournaments and events that keep players working toward something.</div>
+    </div>
+  </section>
+
+  <section id="core">
+    <h2><span class="n">02</span>Core gameplay</h2>
+    <ul>
+      <li>Place units around maps to defend against enemy waves</li>
+      <li>Upgrade units during matches</li>
+      <li>Use different unit abilities and attacks</li>
+      <li>Build teams around different strategies</li>
+      <li>Fight stronger enemies and bosses as they progress</li>
+      <li>Earn rewards to improve their teams and unlock more content</li>
+    </ul>
+    <p>Combat must be fun and strategic. Where a unit is placed and which units a player brings should matter.</p>
+  </section>
+
+  <section id="rarities">
+    <h2><span class="n">03</span>Units and rarities</h2>
+    <p>Collecting units is a core part of the game. Every unit must feel unique, with its own design, attacks, abilities and playstyle. Units must never feel like copies of each other with different appearances.</p>
+    <div class="rarities">
+      <span class="rarity r-common">Common</span>
+      <span class="rarity r-rare">Rare</span>
+      <span class="rarity r-epic">Epic</span>
+      <span class="rarity r-legendary">Legendary</span>
+      <span class="rarity r-mythic">Mythic</span>
+      <span class="rarity r-secret">Secret</span>
+      <span class="rarity r-origin">ORIGIN</span>
+    </div>
+    <p class="note">Mythic units are also the fuel for Limit Breaks. ORIGIN is a special top rarity with exclusive units and events only. Secret units are hidden and very rare pulls.</p>
+  </section>
+
+  <section id="summoning">
+    <h2><span class="n">04</span>Summoning system</h2>
+    <p>Summoning must be exciting. Getting a really rare unit should feel like a big moment, not just a character appearing on screen.</p>
+    <ul>
+      <li>Summoning Center in the lobby</li>
+      <li>Different unit rarities with different summon chances</li>
+      <li>Cinematic summoning animations, with special animations for rare pulls</li>
+      <li>Limited time summon events</li>
+      <li>Exclusive units connected to certain events</li>
+    </ul>
+  </section>
+
+  <section id="combat">
+    <h2><span class="n">05</span>Unit combat and placement</h2>
+    <p>One of the biggest systems in the game. Units have different attack styles, abilities and roles. Some focus on damage, others have different uses depending on the situation.</p>
+    <ul>
+      <li>Unit placement, enemy paths and waves</li>
+      <li>Targeting systems</li>
+      <li>Damage, range and attack speed stats</li>
+      <li>Unique attacks and abilities, plus passive abilities</li>
+      <li>Boss fights, different enemy types and difficulty levels</li>
+    </ul>
+  </section>
+
+  <section id="systems">
+    <h2><span class="n">06</span>Upgrades, Limit Break, Traits, Evolution</h2>
+    <ul>
+      <li><b>In-match upgrades:</b> units can be upgraded during matches with earned currency. Upgrades must make a noticeable difference to damage, range, attack speed, or how a unit&rsquo;s attacks work.</li>
+      <li><b>Limit Break:</b> sacrifice 5 Mythic units to raise a unit&rsquo;s maximum level by 10. Handled at the Limit Break Center. Extra Mythic pulls stay valuable, and Limit Breaks become a major long term goal.</li>
+      <li><b>Traits:</b> customize units and give them additional benefits. Another layer of progression and another reason to keep improving favourite units.</li>
+      <li><b>Evolution:</b> certain units evolve into stronger versions, with improved stats and possibly new appearances, attacks or abilities. Handled at the Evolution Center.</li>
+    </ul>
+  </section>
+
+  <section id="modes">
+    <h2><span class="n">07</span>Game modes</h2>
+    <table>
+      <tr><th>Mode</th><th>What it is</th></tr>
+      <tr><td><b>Story Mode</b></td><td>Stages, worlds, enemies and bosses across the game&rsquo;s storyline</td></tr>
+      <tr><td><b>Raids</b></td><td>Harder encounters with powerful bosses and better rewards</td></tr>
+      <tr><td><b>Tournaments</b></td><td>Competitive play. Players compete and compare team performance</td></tr>
+      <tr><td><b>Challenges</b></td><td>Extra tests of strategy and team composition</td></tr>
+    </table>
+    <p class="note">Each mode must give players something different to work toward.</p>
+  </section>
+
+  <section id="lobby">
+    <h2><span class="n">08</span>Lobby and main hub</h2>
+    <p>The lobby is a real explorable environment, not a basic menu.</p>
+    <table>
+      <tr><th>Location</th><th>Purpose</th></tr>
+      <tr><td>Summoning Center</td><td>Summon new units</td></tr>
+      <tr><td>Evolution Center</td><td>Evolve units</td></tr>
+      <tr><td>Limit Break Center</td><td>Limit Break units</td></tr>
+      <tr><td>Trading Plaza</td><td>Trade units with other players</td></tr>
+      <tr><td>Raid Gate</td><td>Enter raids</td></tr>
+      <tr><td>World Portals</td><td>Travel to Story Mode worlds</td></tr>
+    </table>
+    <p class="note">Social features: party system, multiplayer gameplay, trading, competitive leaderboards, and social interaction in the lobby.</p>
+  </section>
+
+  <section id="trading">
+    <h2><span class="n">09</span>Trading system</h2>
+    <ul>
+      <li>Players trade units through the Trading Plaza</li>
+      <li>Trading supports the collecting loop and player interaction</li>
+      <li><b>Security is a hard requirement:</b> the system must be built to prevent exploits and duping</li>
+    </ul>
+  </section>
+
+  <section id="story">
+    <h2><span class="n">10</span>Maps, enemies, bosses, story</h2>
+    <ul>
+      <li>No two maps should feel the same. Different environments per world, unique enemy designs per world</li>
+      <li>Bosses must feel like their own encounters, not bigger normal enemies</li>
+      <li>Each world has its own atmosphere and challenges</li>
+      <li>Long term progression: collecting rarer units, upgrades, traits, evolutions, Limit Breaks, harder stages, raids, tournaments, special events</li>
+    </ul>
+    <p>Story: an original storyline with mysteries revealed gradually. Players discover things naturally instead of having everything explained up front.</p>
+    <ul>
+      <li><b>ZERO</b>: an original unit created by Jeffee123, important to the story</li>
+      <li><b>ORIGIN</b>: the special rarity is tied to the game&rsquo;s bigger mysteries</li>
+    </ul>
+  </section>
+
+  <section id="quality">
+    <h2><span class="n">11</span>Visual and quality bar</h2>
+    <ul>
+      <li>Detailed anime-inspired unit models</li>
+      <li>Smooth animations and unique attack animations</li>
+      <li>Impressive ability VFX and cinematic summoning animations</li>
+      <li>Detailed maps and environments, polished UI</li>
+      <li>Unique boss designs and effects, special visual effects for rare units and important events</li>
+    </ul>
+  </section>
+
+  <section id="status">
+    <h2><span class="n">12</span>Project status &middot; Nov 27, 2026</h2>
+    <div class="status">
+      <div class="stat"><b>Stage</b>Early development</div>
+      <div class="stat"><b>Done</b>Lobby started by the Director. Full vision planned in this doc.</div>
+      <div class="stat"><b>Not started</b>Gameplay systems (combat, waves, summoning logic), written balancing, most content.</div>
+    </div>
+    <table>
+      <tr><th>Person</th><th>Role</th><th>Ownership</th></tr>
+      <tr><td>Jeffee123</td><td>Game Director / Creator</td><td>Vision, unit concepts, abilities, mechanics, balancing, progression, creative direction</td></tr>
+      <tr><td>Syed Ali (syedalisaleem)</td><td>Developer</td><td>Gameplay systems scripting (waves, placement, combat, upgrades, core loop) and building (lobby, maps, unit/tower models)</td></tr>
+      <tr><td>Open</td><td>Developer</td><td>To be filled</td></tr>
+      <tr><td>Open</td><td>Developer</td><td>To be filled</td></tr>
+      <tr><td>Open</td><td>Developer</td><td>To be filled</td></tr>
+    </table>
+    <p class="note">Team: 5 members planned (Director plus 4 developers), equal revenue share per member, with a higher share for members owning multiple areas. Final responsibilities and percentages are agreed in writing once the team is complete.</p>
+  </section>
+
+  <section id="open">
+    <h2><span class="n">13</span>Open decisions &middot; not yet decided</h2>
+    <p class="note">These are not in the Director&rsquo;s plan yet and need his call before or during the build. Nothing here is invented.</p>
+    <ul class="open">
+      <li>Summon chances per rarity, and summon currency (earned, premium, or both)</li>
+      <li>Launch scope: how many units, maps and Story worlds in version 1</li>
+      <li>Unit roles list (damage, support, crowd control, economy, and others)</li>
+      <li>Trait list and how traits are rolled or changed</li>
+      <li>Evolution requirements (items, currency, level)</li>
+      <li>Enemy and boss roster per world</li>
+      <li>Monetization: gamepasses and dev products, if any</li>
+      <li>Trading rules: which rarities can be traded, trade limits, anti-scam measures</li>
+      <li>The game&rsquo;s final name</li>
+    </ul>
+  </section>
+</main>
+<footer>
+  <p>Working title. Built from Game Director Jeffee123&rsquo;s plan, Nov 27, 2026. Changes to the vision come from the Game Director. System implementation details are added by the developer who owns that system.</p>
+</footer>
+</body>
+</html>
